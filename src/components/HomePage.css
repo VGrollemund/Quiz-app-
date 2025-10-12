@@ -1,0 +1,103 @@
+.homepage-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px);
+  padding: 20px;
+  gap: 60px;
+  color: white;
+}
+
+.homepage-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+}
+
+.homepage-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #00bfff;
+  margin-bottom: 20px;
+}
+
+.game-modes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.game-card {
+  background-color: #1e1e1e;
+  border: 2px solid #00bfff;
+  border-radius: 15px;
+  padding: 20px;
+  width: 280px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.game-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #00bfff;
+}
+
+.game-card h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #00bfff;
+}
+
+.game-card p {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.homepage-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-card {
+  background-color: #1e1e1e;
+  border: 2px solid #00bfff;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  width: 260px;
+  box-shadow: 0 4px 10px rgba(0, 191, 255, 0.2);
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #333;
+  margin-bottom: 10px;
+}
+
+.profile-pseudo {
+  font-size: 1.2rem;
+  color: white;
+}
+
+.profile-edit-btn {
+  background-color: #00bfff;
+  color: black;
+  font-weight: bold;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.profile-edit-btn:hover {
+  background-color: #0099cc;
+}

@@ -1,32 +1,52 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* === Navbar toujours au-dessus === */
+nav,
+.navbar {
+  z-index: 1000 !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+/* === Le reste du contenu commence en dessous === */
+body {
+  margin: 0;
+  background-color: #121212;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center; /* ✅ Centre tout horizontalement */
 }
-a:hover {
-  color: #535bf2;
+
+.app-container {
+  position: relative;
+  z-index: 1;
+  margin-top: 80px; /* ✅ évite que la navbar cache le contenu */
+  display: flex;
+  justify-content: center; /* ✅ centre verticalement le contenu interne */
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  max-width: 1200px; /* ✅ limite la largeur sur les grands écrans */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
 }
 
-
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* === Formulaires (connexion / inscription) === */
+input {
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  margin: 8px 0;
+  width: 250px;
+  font-size: 1em;
+  background-color: #1e1e1e;
+  color: white;
 }
 
 button {
@@ -36,27 +56,175 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #007bff;
+  color: white;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: all 0.25s ease;
+  margin-top: 10px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+button:hover {
+  background-color: #00bfff;
+  transform: scale(1.05);
+}
+
+h2 {
+  color: #fff;
+}
+
+/* === PAGE D’ACCUEIL (HomePage.jsx) === */
+.homepage-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  padding: 40px;
+  color: white;
+  background-color: #121212;
+  min-height: calc(100vh - 80px);
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto; /* ✅ centré horizontalement */
+}
+
+/* === Partie gauche === */
+.homepage-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  text-align: left;
+  max-width: 400px;
+}
+
+.homepage-title {
+  font-size: 2rem;
+  color: #00bfff;
+  margin-bottom: 25px;
+  text-align: left;
+  width: 100%;
+}
+
+.game-modes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.game-card {
+  background-color: #1e1e1e;
+  border: 2px solid #00bfff;
+  border-radius: 15px;
+  padding: 25px;
+  transition: transform 0.2s, background 0.2s;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 191, 255, 0.2);
+  width: 100%;
+}
+
+.game-card:hover {
+  background-color: #00bfff;
+  color: black;
+  transform: translateY(-5px);
+}
+
+.game-card h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.4rem;
+}
+
+/* === Partie droite (profil) === */
+.homepage-right {
+  flex: 0 0 300px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.profile-card {
+  background-color: #1e1e1e;
+  border: 2px solid #00bfff;
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+  width: 280px;
+  box-shadow: 0 4px 10px rgba(0, 191, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: scale(1.02);
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #00bfff;
+  cursor: pointer;
+  object-fit: cover;
+  margin-bottom: 15px;
+  transition: transform 0.2s;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.05);
+}
+
+.profile-pseudo {
+  margin: 10px 0;
+  font-size: 1.3rem;
+}
+
+.profile-edit-btn {
+  background-color: #00bfff;
+  color: black;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.profile-edit-btn:hover {
+  background-color: #0099cc;
+  transform: scale(1.05);
+}
+
+.edit-pseudo {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.edit-pseudo input {
+  border-radius: 8px;
+  padding: 6px;
+  border: none;
+  outline: none;
+}
+
+/* === Animation fluide === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
+
+.homepage-container,
+.app-container,
+.game-card,
+.profile-card {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+

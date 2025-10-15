@@ -1,230 +1,201 @@
-/* === Navbar toujours au-dessus === */
-nav,
-.navbar {
-  z-index: 1000 !important;
+:root {
+  --primary: #2d7ff9;
+  --primary-dark: #1450a3;
+  --light-bg: #f6f8fb;
+  --surface: #fff;
+  --border: #dadada;
+  --text: #202124;
+  --green: #33c94d;
+  --red: #ef5350;
+  --gray: #e0e0e0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  color: var(--text);
+  background: var(--light-bg);
+  min-height: 100vh;
+}
+
+.navbar, nav {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-}
-
-/* === Le reste du contenu commence en dessous === */
-body {
-  margin: 0;
-  background-color: #121212;
-  color: white;
-  font-family: "Poppins", sans-serif;
+  width: 100vw;
+  height: 56px;
+  background: var(--primary);
+  color: #fff;
   display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  align-items: center; /* ✅ Centre tout horizontalement */
+  align-items: center;
+  padding-left: 2vw;
+  z-index: 100;
+  font-size: 1.16rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  box-sizing: border-box;
 }
 
 .app-container {
-  position: relative;
-  z-index: 1;
-  margin-top: 80px; /* ✅ évite que la navbar cache le contenu */
+  margin-top: 56px;
+  min-height: calc(100vh - 56px);
   display: flex;
-  justify-content: center; /* ✅ centre verticalement le contenu interne */
-  align-items: center;
-  min-height: calc(100vh - 80px);
   flex-direction: column;
-  text-align: center;
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
-  max-width: 1200px; /* ✅ limite la largeur sur les grands écrans */
+  max-width: 440px;
+  padding: 32px 8px;
   margin-left: auto;
   margin-right: auto;
-  padding: 20px;
+  box-sizing: border-box;
 }
 
-/* === Formulaires (connexion / inscription) === */
-input {
-  border: none;
-  border-radius: 6px;
-  padding: 10px;
-  margin: 8px 0;
-  width: 250px;
-  font-size: 1em;
-  background-color: #1e1e1e;
-  color: white;
+/* Cartes / blocs */
+.card, .profile-card, .game-card, .question-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 22px 22px 22px;
+  margin: 18px 0;
+  width: 100%;
+  max-width: 370px;
+  box-sizing: border-box;
+  color: var(--text);
+  box-shadow: none;
+}
+
+/* Titres sobres */
+h1, h2 {
+  color: var(--primary-dark);
+  font-weight: 700;
+  margin-top: 0;
+}
+h1 { font-size: 1.95rem; }
+h2 { font-size: 1.28rem; }
+
+input, button, select {
+  font-size: 1.09rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  margin: 8px 0 16px 0;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: var(--primary);
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  margin-top: 10px;
-}
-
-button:hover {
-  background-color: #00bfff;
-  transform: scale(1.05);
-}
-
-h2 {
+  background: var(--primary);
   color: #fff;
-}
-
-/* === PAGE D’ACCUEIL (HomePage.jsx) === */
-.homepage-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 80px;
-  padding: 40px;
-  color: white;
-  background-color: #121212;
-  min-height: calc(100vh - 80px);
-  width: 100%;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto; /* ✅ centré horizontalement */
-}
-
-/* === Partie gauche === */
-.homepage-left {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  text-align: left;
-  max-width: 400px;
-}
-
-.homepage-title {
-  font-size: 2rem;
-  color: #00bfff;
-  margin-bottom: 25px;
-  text-align: left;
-  width: 100%;
-}
-
-.game-modes {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-}
-
-.game-card {
-  background-color: #1e1e1e;
-  border: 2px solid #00bfff;
-  border-radius: 15px;
-  padding: 25px;
-  transition: transform 0.2s, background 0.2s;
+  border: none;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 191, 255, 0.2);
-  width: 100%;
+  margin-top: 0;
+  transition: background 0.15s;
+}
+button:hover, button:focus {
+  background: var(--primary-dark);
 }
 
-.game-card:hover {
-  background-color: #00bfff;
-  color: black;
-  transform: translateY(-5px);
-}
-
-.game-card h2 {
-  margin: 0 0 8px 0;
-  font-size: 1.4rem;
-}
-
-/* === Partie droite (profil) === */
-.homepage-right {
-  flex: 0 0 300px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.profile-card {
-  background-color: #1e1e1e;
-  border: 2px solid #00bfff;
-  border-radius: 15px;
-  padding: 25px;
-  text-align: center;
-  width: 280px;
-  box-shadow: 0 4px 10px rgba(0, 191, 255, 0.2);
-  transition: transform 0.3s ease;
-}
-
-.profile-card:hover {
-  transform: scale(1.02);
+a {
+  color: var(--primary-dark);
+  text-decoration: underline;
+  font-size: 1em;
 }
 
 .profile-avatar {
-  width: 120px;
-  height: 120px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
-  border: 3px solid #00bfff;
-  cursor: pointer;
-  object-fit: cover;
-  margin-bottom: 15px;
-  transition: transform 0.2s;
-}
-
-.profile-avatar:hover {
-  transform: scale(1.05);
-}
-
-.profile-pseudo {
-  margin: 10px 0;
-  font-size: 1.3rem;
-}
-
-.profile-edit-btn {
-  background-color: #00bfff;
-  color: black;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s, transform 0.2s;
-}
-
-.profile-edit-btn:hover {
-  background-color: #0099cc;
-  transform: scale(1.05);
-}
-
-.edit-pseudo {
+  background: var(--gray);
+  color: var(--primary-dark);
+  font-size: 2.3rem;
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 8px;
+  margin: 0 auto 14px auto;
 }
 
-.edit-pseudo input {
+/* Réponses quiz */
+.answer-options, .answer-options-enhanced {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+.answer-option, .answer-option-enhanced {
+  background: #f9fafc;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 12px 10px;
   border-radius: 8px;
-  padding: 6px;
-  border: none;
-  outline: none;
+  cursor: pointer;
+  font-size: 1.05rem;
+  transition: background 0.15s, border 0.15s;
+}
+.answer-option:hover, .answer-option:focus, .answer-option-enhanced:hover, .answer-option-enhanced:focus {
+  background: #eaf2fe;
+  border-color: var(--primary);
+}
+.answer-option.selected, .answer-option-enhanced.selected {
+  border-color: var(--primary);
+  background: #eaf2fe;
+}
+.answer-option.correct, .answer-option-enhanced.correct {
+  border-color: var(--green);
+  background: #d8f8e2;
+  color: var(--green);
+}
+.answer-option.incorrect, .answer-option-enhanced.incorrect {
+  border-color: var(--red);
+  background: #fee0e0;
+  color: var(--red);
 }
 
-/* === Animation fluide === */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+/* Barre de progression basique */
+.progress-container, .progress-container-enhanced {
+  width: 100%;
+  margin: 24px 0 10px 0;
+  height: 8px;
+  background: var(--gray);
+  border-radius: 6px;
+}
+.progress-bar, .progress-bar-enhanced {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 6px;
+  transition: width 0.3s;
+}
+
+/* Score résultats sobres */
+.score-display, .score-display-enhanced {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 34px 18px 30px 18px;
+  margin: 20px 0;
+  color: var(--text);
+  text-align: center;
+}
+
+/* Responsive mobile */
+@media (max-width: 600px) {
+  .app-container {
+    padding: 18px 3vw;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .card, .profile-card, .game-card, .question-container, .score-display, .score-display-enhanced {
+    padding: 16px 6vw;
+    max-width: 95vw;
   }
 }
 
-.homepage-container,
-.app-container,
-.game-card,
-.profile-card {
-  animation: fadeInUp 0.6s ease forwards;
+@media (max-width: 440px) {
+  .navbar, nav { font-size: 1rem; }
 }
-
-

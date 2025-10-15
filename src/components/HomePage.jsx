@@ -1,52 +1,37 @@
 import React from "react";
-import "./HomePage.css";
 
 function HomePage({ pseudo, onSelectMode, onEditPseudo }) {
-  return (
-    <div className="homepage-container">
-      {/* Partie gauche : Choix du mode */}
-      <div className="homepage-left">
-        <h1 className="homepage-title">Choisis ton mode de jeu</h1>
-
-        <div className="game-modes">
-          <div
-            className="game-card"
-            onClick={() => onSelectMode("create")}
-          >
-            <h2>Créer un salon</h2>
-            <p>Invite tes amis et lance une partie privée.</p>
-          </div>
-
-          <div
-            className="game-card"
-            onClick={() => onSelectMode("join")}
-          >
-            <h2>Rejoindre un salon</h2>
-            <p>Entre un code pour rejoindre un salon existant.</p>
-          </div>
-
-          <div
-            className="game-card"
-            onClick={() => onSelectMode("solo")}
-          >
-            <h2>Mode Solo</h2>
-            <p>Joue seul pour t'entraîner et tester tes connaissances.</p>
-          </div>
+  if (typeof onSelectMode !== "function") {
+    return (
+      <div className="app-container">
+        <div className="card">
+          <h1>ROM-charrette-quiz</h1>
+          <p style={{ color: "red", fontWeight: "bold" }}>
+            Erreur : la fonction onSelectMode n’a pas été transmise depuis le parent !
+          </p>
+          <p>Corrigez votre App.js ou parent pour passer <b>onSelectMode</b> en prop.</p>
         </div>
       </div>
+    );
+  }
 
-      {/* Partie droite : Profil */}
-      <div className="homepage-right">
-        <div className="profile-card">
-          <div className="profile-avatar"></div>
-          <p className="profile-pseudo">{pseudo}</p>
-          <button
-            className="profile-edit-btn"
-            onClick={onEditPseudo}
-          >
-            Modifier le pseudo
-          </button>
+  return (
+    <div className="app-container">
+      <div className="card">
+        <h1>ROM-charrette-quiz</h1>
+        <p>Choisissez un mode :</p>
+        <button onClick={() => onSelectMode("solo")}>Mode Solo</button>
+        <button onClick={() => onSelectMode("create")}>Créer un salon</button>
+        <button onClick={() => onSelectMode("join")}>Rejoindre un salon</button>
+      </div>
+      <div className="profile-card" style={{ marginTop: 22 }}>
+        <div className="profile-avatar">
+          {pseudo ? pseudo[0].toUpperCase() : "?"}
         </div>
+        <div style={{ fontWeight: 600 }}>{pseudo}</div>
+        <button style={{ marginTop: 8 }} onClick={onEditPseudo}>
+          Modifier le pseudo
+        </button>
       </div>
     </div>
   );

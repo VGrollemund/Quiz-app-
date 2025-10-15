@@ -28,7 +28,7 @@ function JoinLobby({ onBack, pseudo, onSuccess }) {
       const lobbySnap = await getDoc(lobbyRef);
 
       if (!lobbySnap.exists()) {
-        setError("❌ Ce salon n'existe pas !");
+        setError(" Ce salon n'existe pas !");
         setLoading(false);
         return;
       }
@@ -36,22 +36,22 @@ function JoinLobby({ onBack, pseudo, onSuccess }) {
       const lobbyData = lobbySnap.data();
 
       if (lobbyData.gameStarted) {
-        setError("🚫 La partie a déjà commencé !");
+        setError(" La partie a déjà commencé !");
         setLoading(false);
         return;
       }
 
-      // ✅ Vérifie si le joueur est déjà dedans
+      //  Vérifie si le joueur est déjà dedans
       if (lobbyData.players.includes(pseudo)) {
-        console.log("⚠️ Joueur déjà dans le salon");
+        console.log(" Joueur déjà dans le salon");
       } else {
-        // ✅ Ajoute le joueur
+        //  Ajoute le joueur
         await updateDoc(lobbyRef, {
           players: arrayUnion(pseudo),
         });
       }
 
-      console.log("✅ Joueur ajouté au salon:", code.toUpperCase());
+      console.log(" Joueur ajouté au salon:", code.toUpperCase());
       if (onSuccess) onSuccess(code.toUpperCase());
     } catch (err) {
       console.error("Erreur Firestore:", err);

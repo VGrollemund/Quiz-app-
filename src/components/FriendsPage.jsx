@@ -46,15 +46,15 @@ function FriendsPage({ user }) {
   const handleAddFriend = async () => {
     setMessage("");
     if (!searchTag.includes("#")) {
-      setMessage("❌ Format invalide (ex: Owaïs#1234)");
+      setMessage(" Format invalide (ex: Owaïs#1234)");
       return;
     }
     if (searchTag === userData?.userTag) {
-      setMessage("⚠️ Tu ne peux pas t’ajouter toi-même !");
+      setMessage(" Tu ne peux pas t’ajouter toi-même !");
       return;
     }
     if (friends.some((f) => f.username === searchTag)) {
-      setMessage("⚠️ Cet utilisateur est déjà ton ami !");
+      setMessage(" Cet utilisateur est déjà ton ami !");
       return;
     }
 
@@ -64,7 +64,7 @@ function FriendsPage({ user }) {
       const querySnapshot = await getDocs(q);
 
       if (querySnapshot.empty) {
-        setMessage("❌ Aucun utilisateur trouvé avec ce tag !");
+        setMessage(" Aucun utilisateur trouvé avec ce tag !");
         return;
       }
 
@@ -78,18 +78,18 @@ function FriendsPage({ user }) {
         friends: arrayUnion({ username: friendData.userTag, uid: friendUid }),
       });
 
-      // ✅ Met à jour immédiatement l’affichage sans refresh
+      //  Met à jour immédiatement l’affichage sans refresh
       setFriends((prev) => [
         ...prev,
         { username: friendData.userTag, uid: friendUid },
       ]);
 
       setSearchTag("");
-      setMessage(`✅ ${friendData.userTag} ajouté à ta liste d’amis !`);
+      setMessage(` ${friendData.userTag} ajouté à ta liste d’amis !`);
     } catch (err) {
       console.error("Erreur Firestore :", err);
-      // 🧩 Corrige le faux message d’erreur : Firestore renvoie parfois une exception mineure
-      setMessage("✅ Ami ajouté avec succès !");
+      //  Corrige le faux message d’erreur : Firestore renvoie parfois une exception mineure
+      setMessage(" Ami ajouté avec succès !");
     }
   };
 

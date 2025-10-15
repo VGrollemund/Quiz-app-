@@ -1,0 +1,285 @@
+/* ===== STYLES POUR QUIZ CONTAINER ===== */
+.quiz-container-enhanced {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+  padding: 100px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.quiz-container-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 30% 20%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(240, 147, 251, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* ===== BARRE DE PROGRESSION ===== */
+.progress-container-enhanced {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 30px;
+  text-align: center;
+  z-index: 1;
+}
+
+.progress-bar-wrapper {
+  position: relative;
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 15px 0;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.progress-bar-enhanced {
+  height: 100%;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  border-radius: 20px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow: 0 0 15px rgba(79, 172, 254, 0.5);
+}
+
+.progress-bar-enhanced::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 20px 20px;
+  animation: progress-animation 2s linear infinite;
+}
+
+@keyframes progress-animation {
+  0% { background-position: 0 0; }
+  100% { background-position: 20px 20px; }
+}
+
+.progress-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-top: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.progress-percentage {
+  color: #00d4ff;
+  font-weight: 700;
+}
+
+/* ===== QUESTION ===== */
+.question-container-enhanced {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 40px;
+  margin: 20px 0;
+  max-width: 800px;
+  width: 100%;
+  animation: slideInUp 0.6s ease-out;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.question-container-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.question-title-enhanced {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 30px;
+  text-align: center;
+  position: relative;
+  line-height: 1.3;
+}
+
+.question-title-enhanced::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: #00d4ff;
+  border-radius: 2px;
+}
+
+/* ===== OPTIONS DE RÉPONSE (2 colonnes) ===== */
+.answer-options-enhanced {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  width: 100%;
+  max-width: 600px;
+  margin: 30px auto 0;
+  justify-items: center;
+}
+
+/* ===== STYLE DE CHAQUE BOUTON ===== */
+.answer-option-enhanced {
+  background: #e0e0e0; /* 🩶 gris clair */
+  border: 2px solid #cfcfcf;
+  border-radius: 14px;
+  padding: 18px 22px;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #000000; /* 🖤 texte noir */
+  min-height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover (au contact du curseur) */
+.answer-option-enhanced:hover {
+  background: linear-gradient(135deg, #00bfff, #007bff);
+  color: #ffffff;
+  border-color: #00aaff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
+}
+
+/* Sélectionné (même effet que hover) */
+.answer-option-enhanced.selected {
+  background: linear-gradient(135deg, #007bff, #00c6ff);
+  border-color: #00bfff;
+  color: #ffffff;
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.6);
+}
+
+/* Bonne réponse (vert vif) */
+.answer-option-enhanced.correct {
+  background: linear-gradient(135deg, #28a745, #2ecc71);
+  border-color: #28a745;
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  animation: correctPulse 0.6s ease-out;
+  box-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+}
+
+/* Mauvaise réponse (rouge vif) */
+.answer-option-enhanced.incorrect {
+  background: linear-gradient(135deg, #e53935, #ff1744);
+  border-color: #ff1744;
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  animation: shake 0.5s ease-out;
+  box-shadow: 0 0 20px rgba(229, 57, 53, 0.5);
+}
+
+@keyframes correctPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+}
+
+/* ===== SCORE DISPLAY ===== */
+.score-display-enhanced {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 50px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  animation: scaleIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes scaleIn {
+  0% { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .quiz-container-enhanced {
+    padding: 80px 15px 20px;
+  }
+
+  .question-container-enhanced {
+    padding: 25px;
+    margin: 15px 0;
+  }
+
+  .question-title-enhanced {
+    font-size: 1.5rem;
+  }
+
+  .answer-options-enhanced {
+    grid-template-columns: 1fr; /* ✅ une seule colonne sur mobile */
+    gap: 12px;
+  }
+
+  .answer-option-enhanced {
+    padding: 18px 20px;
+    min-height: 55px;
+  }
+
+  .score-display-enhanced {
+    padding: 35px 25px;
+  }
+}

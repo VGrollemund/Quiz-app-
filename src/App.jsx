@@ -15,7 +15,7 @@ import QuizContainer from "./components/QuizContainer";
 import Profile from "./components/Profile";
 import FriendsPage from "./components/FriendsPage";
 import Navbar from "./components/Navbar";
-import HomePage from "./components/HomePage"; // ✅ nouvelle page d’accueil
+import HomePage from "./components/HomePage";
 
 import "./index.css";
 
@@ -30,7 +30,7 @@ function App() {
   const [view, setView] = useState("menu");
   const [lobbyCode, setLobbyCode] = useState("");
 
-  // === INSCRIPTION ===
+  // INSCRIPTION
   const register = async () => {
     if (!username) return alert("Veuillez entrer un pseudo !");
     try {
@@ -40,10 +40,8 @@ function App() {
         password
       );
       const newUser = userCredential.user;
-
       const randomTag = Math.floor(1000 + Math.random() * 9000);
       const userTag = `${username}#${randomTag}`;
-
       await setDoc(doc(db, "users", newUser.uid), {
         email,
         username,
@@ -54,9 +52,7 @@ function App() {
         bestScore: 0,
         accuracy: 0,
       });
-
       await setDoc(doc(db, "friends", newUser.uid), { friends: [] });
-
       await sendEmailVerification(newUser);
       alert("Vérifiez votre boîte mail pour activer votre compte !");
       setUser(newUser);
@@ -67,7 +63,7 @@ function App() {
     }
   };
 
-  // === CONNEXION ===
+  // CONNEXION
   const login = async () => {
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -95,14 +91,14 @@ function App() {
     }
   };
 
-  // === DÉCONNEXION ===
+  // DÉCONNEXION
   const logout = async () => {
     await signOut(auth);
     setUser(null);
     setView("menu");
   };
 
-  // === CRÉER UN SALON ===
+  // CRÉER UN SALON
   const createLobby = async () => {
     try {
       let newCode;
@@ -132,15 +128,17 @@ function App() {
     }
   };
 
-  // === CALLBACK APRÈS REJOINDRE SALON ===
+  // APRÈS REJOINDRE SALON
   const handleJoinSuccess = (code) => {
     setLobbyCode(code);
     setView("lobby");
   };
 
+  // Pour QuizContainer affichage fullscreen
   const isQuizActive = view === "solo" || view === "lobby";
 
-  // === SI PAS CONNECTÉ ===
+  // —————————————————————————
+  // NON CONNECTÉ : Connexion/Inscription
   if (!user) {
     return (
       <div className="app-container">
@@ -151,7 +149,6 @@ function App() {
         />
         <div style={{ textAlign: "center", marginTop: 50 }}>
           <h2>{isRegisterMode ? "Inscription" : "Connexion"}</h2>
-
           {isRegisterMode && (
             <input
               type="text"
@@ -175,7 +172,6 @@ function App() {
             onChange={(e) => setPassword(e.target.value)}
             style={{ display: "block", margin: "10px auto", padding: "8px" }}
           />
-
           {isRegisterMode ? (
             <>
               <button onClick={register}>S'inscrire</button>
@@ -208,7 +204,8 @@ function App() {
     );
   }
 
-  // === UTILISATEUR CONNECTÉ ===
+  // —————————————————————————
+  // CONNECTÉ : Navigation interne
   return (
     <div className={isQuizActive ? "quiz-fullscreen" : "app-container"}>
       <Navbar
@@ -221,11 +218,21 @@ function App() {
       {showProfile ? (
         <Profile user={user} />
       ) : view === "menu" ? (
+        // Correction ici : HomePage reçoit UN SEUL handler pour le choix de mode
         <HomePage
           pseudo={pseudo}
-          onCreateLobby={() => createLobby()}
-          onJoinLobby={() => setView("join")}
-          onSolo={() => setView("solo")}
+          onSelectMode={(mode) => {
+            if (mode === "solo") setView("solo");
+            else if (mode === "create") createLobby();
+            else if (mode === "join") setView("join");
+          }}
+          onEditPseudo={() => {
+            const nouveauPseudo = prompt("Nouveau pseudo ?");
+            if (nouveauPseudo) {
+              setPseudo(nouveauPseudo);
+              localStorage.setItem("pseudo", nouveauPseudo);
+            }
+          }}
         />
       ) : view === "solo" ? (
         <QuizContainer />
@@ -261,5 +268,3 @@ function App() {
 }
 
 export default App;
-
-

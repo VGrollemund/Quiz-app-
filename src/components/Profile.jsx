@@ -34,7 +34,7 @@ function Profile({ user }) {
       }}
     >
       <h2 style={{ fontSize: "2rem", color: "#00aaff", marginBottom: "20px" }}>
-        👤 Mon profil
+         Mon profil
       </h2>
 
       <img
@@ -52,7 +52,7 @@ function Profile({ user }) {
       <h3 style={{ marginBottom: "10px", color: "#fff" }}>
         {userData.username}
       </h3>
-      {/* ✅ Affichage du tag utilisateur */}
+      {/*  Affichage du tag utilisateur */}
       <p style={{ color: "#aaa", marginBottom: "20px" }}>
         Tag : <strong>{userData.userTag}</strong>
       </p>

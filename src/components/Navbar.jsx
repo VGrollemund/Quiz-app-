@@ -47,7 +47,7 @@ function Navbar({ user, onProfile, onHome, onLogout }) {
             onMouseEnter={(e) => (e.target.style.backgroundColor = "#eee")}
             onMouseLeave={(e) => (e.target.style.backgroundColor = "white")}
           >
-            👤 Profil
+             Profil
           </button>
 
           <button
@@ -65,7 +65,7 @@ function Navbar({ user, onProfile, onHome, onLogout }) {
             onMouseEnter={(e) => (e.target.style.backgroundColor = "#b02a37")}
             onMouseLeave={(e) => (e.target.style.backgroundColor = "#dc3545")}
           >
-            🔒 Déconnexion
+             Déconnexion
           </button>
         </div>
       )}

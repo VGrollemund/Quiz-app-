@@ -10,16 +10,14 @@ const ALL_TYPES = [
 function PokemonTypeQuestion({ pokemon, onValidate }) {
   const [availableTypes, setAvailableTypes] = useState(ALL_TYPES);
   const [chosenTypes, setChosenTypes] = useState([]);
-  const [feedback, setFeedback] = useState(""); //  Nouveau : feedback visuel
+  const [feedback, setFeedback] = useState("");
 
-  //  Réinitialisation automatique à chaque nouveau Pokémon
   useEffect(() => {
     setAvailableTypes(ALL_TYPES);
     setChosenTypes([]);
     setFeedback("");
   }, [pokemon]);
 
-  // --- Glisser-déposer ---
   const handleDragStart = (e, type) => {
     e.dataTransfer.setData("type", type);
   };
@@ -35,13 +33,11 @@ function PokemonTypeQuestion({ pokemon, onValidate }) {
 
   const handleDragOver = (e) => e.preventDefault();
 
-  // --- Retirer un type choisi ---
   const removeChosenType = (type) => {
     setChosenTypes(chosenTypes.filter((t) => t !== type));
     setAvailableTypes([...availableTypes, type]);
   };
 
-  // --- Vérifier la réponse ---
   const checkAnswer = () => {
     const correct = arraysEqual(
       chosenTypes.sort(),
@@ -49,12 +45,11 @@ function PokemonTypeQuestion({ pokemon, onValidate }) {
     );
 
     if (correct) {
-      setFeedback("✅ Bonne réponse !");
+      setFeedback(" Bonne réponse !");
     } else {
-      setFeedback(`❌ Mauvaise réponse ! (${pokemon.types.join(", ")})`);
+      setFeedback(` Mauvaise réponse ! (${pokemon.types.join(", ")})`);
     }
 
-    // Affiche le feedback 1.5s avant de passer à la suivante
     setTimeout(() => {
       onValidate(correct);
       setFeedback("");
@@ -109,7 +104,7 @@ function PokemonTypeQuestion({ pokemon, onValidate }) {
         }}
       >
         {chosenTypes.length === 0 ? (
-          <p style={{ color: "#ccc" }}>Glisse ici le ou les types !</p>
+          <p style={{ color: "#c8ab1cff" }}>Glisse ici le ou les types !</p>
         ) : (
           chosenTypes.map((type) => (
             <div
@@ -132,13 +127,13 @@ function PokemonTypeQuestion({ pokemon, onValidate }) {
         )}
       </div>
 
-      {/* Types disponibles */}
+      {/* Types disponibles : STYLES VISIBLES ORANGES */}
       <div
         style={{
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
-          gap: "8px",
+          gap: "10px",
           marginTop: "15px",
         }}
       >
@@ -148,28 +143,40 @@ function PokemonTypeQuestion({ pokemon, onValidate }) {
             draggable
             onDragStart={(e) => handleDragStart(e, type)}
             style={{
-              backgroundColor: "rgba(255,255,255,0.15)",
-              border: "1px solid rgba(255,255,255,0.2)",
-              color: "white",
-              padding: "8px 14px",
-              borderRadius: "20px",
+              backgroundColor: "#ffcb05",
+              border: "2px solid #ffcb05",
+              color: "#fff",
+              padding: "10px 22px",
+              borderRadius: "18px",
+              fontWeight: "bold",
               cursor: "grab",
-              transition: "background 0.2s, transform 0.2s",
+              fontSize: "1.12em",
+              boxShadow: "0 2px 8px rgba(255,152,0,0.13)",
+              margin: "6px 0",
+              letterSpacing: "1px",
+              transition: "background 0.2s, border 0.2s, transform 0.15s",
+              userSelect: "none"
             }}
+            onMouseEnter={e =>
+              (e.currentTarget.style.backgroundColor = "#ffcb05")
+            }
+            onMouseLeave={e =>
+              (e.currentTarget.style.backgroundColor = "#ffcb05")
+            }
           >
             {type.toUpperCase()}
           </div>
         ))}
       </div>
 
-      {/*  Feedback visuel */}
+      {/* Feedback visuel */}
       {feedback && (
         <p
           style={{
             marginTop: "20px",
             fontSize: "1.2rem",
             fontWeight: "bold",
-            color: feedback.includes("Bonne") ? "#28a745" : "#dc3545",
+            color: feedback.includes("Bonne") ? "#28a745" : "#ffcb05",
             background: "rgba(255, 255, 255, 0.1)",
             padding: "10px 20px",
             borderRadius: "10px",

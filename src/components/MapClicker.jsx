@@ -32,7 +32,7 @@ export default function MapClicker({ onSelect }) {
 
   return (
     <div style={{ position: "relative", marginTop: "15px" }}>
-      {/* 🧭 Message d'aide */}
+      {/*  Message d'aide */}
       <p
         style={{
           position: "absolute",
@@ -47,10 +47,10 @@ export default function MapClicker({ onSelect }) {
           zIndex: 1000,
         }}
       >
-        🗺️ Cliquez sur la carte pour placer un marqueur
+         Cliquez sur la carte pour placer un marqueur
       </p>
 
-      {/* 🗺️ Carte basemap.xyz */}
+      {/*  Carte basemap.xyz */}
       <MapContainer
         center={[20, 0]}
         zoom={2}

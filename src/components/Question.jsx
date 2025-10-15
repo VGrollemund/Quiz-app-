@@ -12,15 +12,15 @@ function Question({
   isLocked,
 }) {
   const [feedback, setFeedback] = useState("");
-  const [imageLoaded, setImageLoaded] = useState(false); // 👈 pour l'effet de fondu
+  const [imageLoaded, setImageLoaded] = useState(false); //  pour l'effet de fondu
 
   // Gestion du message de feedback (bonne/mauvaise réponse)
   useEffect(() => {
     if (isLocked && userAnswer) {
       if (userAnswer === answer) {
-        setFeedback("✅ Bonne réponse !");
+        setFeedback(" Bonne réponse !");
       } else {
-        setFeedback(`❌ Mauvaise réponse ! (Réponse correcte : ${answer})`);
+        setFeedback(` Mauvaise réponse ! (Réponse correcte : ${answer})`);
       }
     } else {
       setFeedback("");
@@ -38,16 +38,16 @@ function Question({
       }}
     >
       {/* Question */}
-      <h2 style={{ fontSize: "1.5rem", color: "white", fontWeight: "bold" }}>
+      <h2 style={{ fontSize: "1.5rem", color: "blue", fontWeight: "bold" }}>
         {question}
       </h2>
 
-      {/* ✅ On n'affiche l'image que si "flag" existe */}
+      {/*  On n'affiche l'image que si "flag" existe */}
       {flag && (
         <img
           src={flag}
           alt="Illustration"
-          onLoad={() => setImageLoaded(true)} // 👈 dès que l'image est chargée
+          onLoad={() => setImageLoaded(true)} //  dès que l'image est chargée
           style={{
             width: "180px",
             height: "auto",

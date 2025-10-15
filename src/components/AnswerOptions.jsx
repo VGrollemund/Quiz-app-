@@ -1,5 +1,4 @@
-// AnswerOptions.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 function AnswerOptions({ options, answer, userAnswer, onAnswer, isLocked }) {
   const [selected, setSelected] = useState(null);
@@ -15,65 +14,26 @@ function AnswerOptions({ options, answer, userAnswer, onAnswer, isLocked }) {
     }
   };
 
-  const getButtonStyle = (opt) => {
+  const getOptionClass = (opt) => {
+    let classes = ['answer-option-enhanced'];
+    
     if (!isLocked) {
-      return {
-        padding: "14px 20px",
-        borderRadius: "10px",
-        border: "2px solid #ccc",
-        cursor: "pointer",
-        background: selected === opt ? "#007bff" : "#f0f0f0",
-        color: selected === opt ? "white" : "black",
-        fontWeight: selected === opt ? "bold" : "normal",
-        transform: selected === opt ? "scale(1.05)" : "scale(1)",
-        transition: "all 0.2s ease-in-out",
-      };
-    }
-
-    if (opt === answer) {
-      return {
-        background: "#28a745",
-        color: "white",
-        border: "2px solid #28a745",
-        padding: "14px 20px",
-        borderRadius: "10px",
-      };
-    } else if (opt === selected && selected !== answer) {
-      return {
-        background: "#dc3545",
-        color: "white",
-        border: "2px solid #dc3545",
-        padding: "14px 20px",
-        borderRadius: "10px",
-      };
+      if (selected === opt) classes.push('selected');
     } else {
-      return {
-        background: "#e0e0e0",
-        color: "#555",
-        border: "2px solid #ccc",
-        padding: "14px 20px",
-        borderRadius: "10px",
-      };
+      if (opt === answer) classes.push('correct');
+      else if (opt === selected && selected !== answer) classes.push('incorrect');
     }
+    
+    return classes.join(' ');
   };
 
   return (
-    <div
-      className="answer-options"
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(2, 1fr)", // 🔥 deux colonnes
-        gap: "15px",
-        width: "100%",
-        maxWidth: "500px",
-        marginTop: "15px",
-      }}
-    >
+    <div className="answer-options-enhanced">
       {options.map((opt, i) => (
         <button
           key={i}
           onClick={() => handleClick(opt)}
-          style={getButtonStyle(opt)}
+          className={getOptionClass(opt)}
           disabled={isLocked}
         >
           {opt}
@@ -84,3 +44,4 @@ function AnswerOptions({ options, answer, userAnswer, onAnswer, isLocked }) {
 }
 
 export default AnswerOptions;
+
